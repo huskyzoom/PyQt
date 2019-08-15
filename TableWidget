@@ -1,1 +1,80 @@
+1st set tableWidget item:      
+        tableWidget.setItem(row,column,QTableWidgetItem(index))
+        
+2st set tableWidget font:
+        fnt = self.tableWidget.font()
+        fnt.setPointSize(int) e.g. 20
+        self.tableWidget.setFont(fnt)
+        
+        
+        
+3st  resize tableWidget
+        self.tableWidget.horizontalHeader().setStretchLastSection(True)
+        self.tableWidget.verticalHeader().setStretchLastSection(True)
+        self.tableWidget.resizeColumnsToContents()
+        self.tableWidget.resizeRowsToContents() 
+      
+4st set tableWidget header
+        Header=['A','B','C']
+        self.tableWidget.setHorizontalHeaderLabels(Header)
+        self.tableWidget.horizontalHeader().setVisible(True)   
 
+5st tableWidget StyleSheet
+        self.tableWidget.setStyleSheet(
+        'selection-background-color:lightblue;border-top:0px ;'
+        "::section {""background-color:#71b9b3 ;color:#f1f1f1;font-size: 18pt;}"
+        
+        
+6st add comboBox into tableWidget 
+        list = []
+        comboBox = QtWidgets.QComboBox()
+        comboBox.addItems(list)
+        self.tableWidget.setCellWidget(Row, Column, comboBox)
+        
+        
+7st comboBox StyleSheet   (eg list margin,font,icon,section-color)
+        comboBox.setView(QListView())
+        qss =  """
+        QComboBox {
+                    font-family: "Arial";
+                    font-size: 20px;
+                    padding-left:25px;
+        }
+        QComboBox QAbstractItemView::item{
+                    min-height: 35px;
+                    min-width: 50px;
+                }
+        QListView::item:selected{
+                    color: white; 
+                    background-color: #71b9b3;
+        }
+        QComboBox QAbstractItemView{
+                    border: 0px;
+                }
+                    ::drop-down {
+                    border-left-style: solid;
+                    background-color: transparent; 
+                    image: url(caret-down (2).png);
+                    subcontrol-origin: padding;
+                    subcontrol-position: top right;
+                    width:60px;
+                    padding: -5;
+                    margin: -10;
+                }
+                ::indicator{
+                    background-color:transparent;
+                    selection-background-color:transparent;
+                    color:transparent;
+                    selection-color:transparent;
+                }
+                """
+        comboBox.setStyleSheet(qss)
+        
+        
+        
+8st Send combox Index Changed signal
+        comboBox.currentIndexChanged.connect(signalMapper)
+
+ 
+        
+        
