@@ -1,0 +1,22 @@
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+        
+    @pyqtSlot()
+    def mousePressEvent(self, event):
+        self.oldPos = event.globalPos()
+        
+    @pyqtSlot()
+    def mouseMoveEvent(self, event):
+        try:
+            delta = QPoint (event.globalPos() - self.oldPos)
+            self.move(self.x() + delta.x(), self.y() + delta.y())
+            self.oldPos = event.globalPos()
+        except Exception as e: pass
+        
+    @pyqtSlot()        
+    def keyPressEvent(self, e):
+        if (e.modifiers() == Qt.ControlModifier | Qt.AltModifier ) and (e.key() == Qt.Key_A):   
+            self.on_pushButton_clicked()    
