@@ -1,0 +1,31 @@
+    @pyqtSlot()
+    def cont(self):         
+        self.loading_process = Thread_1()
+        self.loading_process.finishSignal.connect(self.luck)
+        self.loading_process.start()
+            
+            
+            
+   def loop(self, image_path):
+        q.put(image_path)
+        q.put(self.tableWidget)
+        self.cont()  
+        
+  @pyqtSlot(int)
+    def luck(self, insert):
+        if insert ==1:
+            err = q.get()
+            QMessageBox.critical(self, 'Warning', "Failed：  %s"%(err) ) 
+        else:
+            self.set_data()   
+      
+      
+class Thread_1(QtCore.QThread):
+    finishSignal = QtCore.pyqtSignal(int)
+    
+    def __init__(self, parent=None):
+        super(Thread_1,  self).__init__(parent)        
+    
+    def run(self):
+        pass
+        
